@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "com.example.chenkai.zxingqrcode"
         minSdkVersion 15
@@ -26,6 +26,6 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
     compile project(':zxinglib')
-    compile 'com.android.support:support-v4:25.2.0'
-    compile 'com.android.support:appcompat-v7:25.2.0'
+    compile 'com.android.support:support-v4:26.+'
+    compile 'com.android.support:appcompat-v7:26.+'
 }
