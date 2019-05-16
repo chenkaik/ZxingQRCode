@@ -9,8 +9,8 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.afun.zxinglib.BeepManager;
-import com.afun.zxinglib.ScanView.ZXingScannerViewNew;
+import com.example.chenkai.zxingqrcode.zxing.BeepManager;
+import com.example.chenkai.zxingqrcode.zxing.ZXingScannerViewNew;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 

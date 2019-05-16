@@ -1,4 +1,4 @@
-package com.afun.zxinglib.ScanView;
+package com.example.chenkai.zxingqrcode.zxing;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -9,10 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.afun.zxinglib.CameraPreview;
-import com.afun.zxinglib.CameraUtils;
-import com.afun.zxinglib.DisplayUtils;
-import com.afun.zxinglib.R;
+import com.example.chenkai.zxingqrcode.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.DecodeHintType;

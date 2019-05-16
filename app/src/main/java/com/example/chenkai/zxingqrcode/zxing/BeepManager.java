@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.afun.zxinglib;
+package com.example.chenkai.zxingqrcode.zxing;
 
 import android.app.Activity;
 import android.content.Context;
@@ -26,11 +26,13 @@ import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.example.chenkai.zxingqrcode.R;
+
 import java.io.Closeable;
 import java.io.IOException;
 
 /**
- * Manages beeps and vibrations for {@link CaptureActivity}.
+ * Manages beeps and vibrations for
  * http://blog.csdn.net/u010420435/article/details/46841611
  */
 public class BeepManager implements MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener, Closeable {

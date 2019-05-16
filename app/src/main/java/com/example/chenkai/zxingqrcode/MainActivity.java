@@ -17,7 +17,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.afun.zxinglib.EncodingUtils;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 

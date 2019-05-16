@@ -1,4 +1,4 @@
-package com.afun.zxinglib;
+package com.example.chenkai.zxingqrcode.zxing;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -18,6 +18,8 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.example.chenkai.zxingqrcode.R;
 
 public class ViewFinderView extends View {
     private static final String TAG = "ViewFinderView";

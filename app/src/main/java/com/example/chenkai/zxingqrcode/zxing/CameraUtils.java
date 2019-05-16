@@ -1,4 +1,4 @@
-package com.afun.zxinglib;
+package com.example.chenkai.zxingqrcode.zxing;
 
 import android.hardware.Camera;
 
