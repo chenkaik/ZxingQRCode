@@ -45,9 +45,9 @@ public class ZXingScannerViewNew extends FrameLayout implements Camera.PreviewCa
 
     private void init() {
         addView(mPreview = new CameraPreview(getContext()));
-        showPanel = View.inflate(getContext(), R.layout.default_scan, null);
+        showPanel = View.inflate(getContext(), R.layout.default_scan, null); // 默认扫描页面
         addView(showPanel);
-        initMultiFormatReader();
+        initMultiFormatReader(); // 初始化解码的类
     }
 
     public void setContentView(int res) {
@@ -99,10 +99,11 @@ public class ZXingScannerViewNew extends FrameLayout implements Camera.PreviewCa
         if (qrSize == null || qrSize.getDetectRect() == null) {
             return null;
         }
+        // 通过回调方法获取扫描区的rect
         Rect rect = qrSize.getDetectRect();
 
-        int width=showPanel.getWidth();
-        int height=showPanel.getHeight();
+        int width = showPanel.getWidth();
+        int height = showPanel.getHeight();
         if ((rect.right - rect.left) != 0 && (rect.top - rect.bottom) != 0) {
             rect.left = rect.left * previewWidth / width;
             rect.right = rect.right * previewWidth / width;
@@ -224,7 +225,7 @@ public class ZXingScannerViewNew extends FrameLayout implements Camera.PreviewCa
     }
 
     private void startFreshThread(final Camera camera, final Camera.PreviewCallback callback) {
-        timer = new Timer();
+        timer = new Timer(); // 初始化每timer每隔1.5秒设置一次 setOneShotPreviewCallback
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -243,15 +244,16 @@ public class ZXingScannerViewNew extends FrameLayout implements Camera.PreviewCa
 
     @Override
     public void onPreviewFrame(byte[] data, Camera camera) {
-        if (onlyOnce) {
+        if (onlyOnce) { // 只开启timer一次
             startFreshThread(camera, this);
             onlyOnce = false;
         }
         Camera.Parameters parameters = camera.getParameters();
+        // 获取帧视频size
         Camera.Size size = parameters.getPreviewSize();
-        int width = size.width;
-        int height = size.height;
-        if (DisplayUtils.getScreenOrientation(getContext()) == Configuration.ORIENTATION_PORTRAIT) {
+        int width = size.width; // 获取帧视频宽度
+        int height = size.height; // 获取帧视频高度
+        if (DisplayUtils.getScreenOrientation(getContext()) == Configuration.ORIENTATION_PORTRAIT) { // 判断是否是竖屏
             if (rotatedData == null) {
                 rotatedData = new byte[data.length];
             }
@@ -259,16 +261,20 @@ public class ZXingScannerViewNew extends FrameLayout implements Camera.PreviewCa
                 for (int x = 0; x < width; x++)
                     rotatedData[x * height + height - y - 1] = data[x + y * width];
             }
+            // 交换高和宽的值
             int tmp = width;
             width = height;
             height = tmp;
             data = rotatedData;
         }
         Result rawResult = null;
+        // 调用zxing jar包中的方法 生成解码所需的YUV类型数据
         PlanarYUVLuminanceSource source = buildLuminanceSource(data, width, height);
         if (source != null) {
+            // 调用zxing jar包中的方法将source转为bitmap
             BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
             try {
+                // 调用zxing jar包中的方法进行解码
                 rawResult = mMultiFormatReader.decodeWithState(bitmap);
             } catch (ReaderException re) {
                 // continue
@@ -284,11 +290,20 @@ public class ZXingScannerViewNew extends FrameLayout implements Camera.PreviewCa
         if (rawResult != null) {
 //            stopCamera();
             if (mResultHandler != null) {
+                // 将结果返回给回调方法handleResult
                 mResultHandler.handleResult(rawResult);
             }
         }
     }
 
+    /**
+     * 形成解码所需数据
+     *
+     * @param data   帧视频数据
+     * @param width  帧视频的宽
+     * @param height 帧视频的高
+     * @return PlanarYUVLuminanceSource
+     */
     public PlanarYUVLuminanceSource buildLuminanceSource(byte[] data, int width, int height) {
         Rect rect = getFramingRectInPreview(width, height);
         if (rect == null) {

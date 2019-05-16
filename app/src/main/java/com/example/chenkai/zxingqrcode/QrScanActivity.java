@@ -69,16 +69,16 @@ public class QrScanActivity extends AppCompatActivity implements ZXingScannerVie
     public void setupFormats() {
         List<BarcodeFormat> formats = new ArrayList<BarcodeFormat>();
         formats.add(BarcodeFormat.QR_CODE);
-        /**
-        formats.add(BarcodeFormat.UPC_A);
-        formats.add(BarcodeFormat.UPC_E);
-        formats.add(BarcodeFormat.EAN_13);
-        formats.add(BarcodeFormat.EAN_8);
-        formats.add(BarcodeFormat.CODE_39);
-        formats.add(BarcodeFormat.CODE_93);
-        formats.add(BarcodeFormat.CODE_128);
-        formats.add(BarcodeFormat.ITF);
-         */
+
+//        formats.add(BarcodeFormat.UPC_A);
+//        formats.add(BarcodeFormat.UPC_E);
+//        formats.add(BarcodeFormat.EAN_13);
+//        formats.add(BarcodeFormat.EAN_8);
+//        formats.add(BarcodeFormat.CODE_39);
+//        formats.add(BarcodeFormat.CODE_93);
+//        formats.add(BarcodeFormat.CODE_128); // 一维码
+//        formats.add(BarcodeFormat.ITF);
+
         if (scanView != null) {
             scanView.setFormats(formats);
         }
