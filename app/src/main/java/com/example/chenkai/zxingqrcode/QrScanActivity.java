@@ -1,8 +1,10 @@
 package com.example.chenkai.zxingqrcode;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QrScanActivity extends AppCompatActivity implements ZXingScannerViewNew.ResultHandler, ZXingScannerViewNew.QrSize {
+    private static final String TAG = "QrScanActivity";
     ZXingScannerViewNew scanView;
     private TextView result;
     private BeepManager beepManager;
@@ -33,7 +36,7 @@ public class QrScanActivity extends AppCompatActivity implements ZXingScannerVie
         beepManager = new BeepManager(this);
         setupFormats();
         initViews();
-        result= (TextView) findViewById(R.id.editText);
+        result = (TextView) findViewById(R.id.editText);
     }
 
     private void initViews() {
@@ -62,7 +65,14 @@ public class QrScanActivity extends AppCompatActivity implements ZXingScannerVie
     public void handleResult(Result rawResult) {
         beepManager.playBeepSoundAndVibrate();
         // 回调方法中接收扫描结果并且设置到textview中  可判断扫描结果是否为null
-        result.setText(rawResult.toString());
+        String res = rawResult.toString();
+        Log.e(TAG, "handleResult: " + res);
+//        result.setText(res);
+        Intent intent = new Intent();
+        intent.putExtra("codeContent", res);
+        setResult(RESULT_OK, intent);
+        this.finish();
+
     }
 
     // 可以解析二维码和条形码等，我们这里只添加二维码格式，让他只处理二维码
